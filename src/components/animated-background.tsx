@@ -18,19 +18,19 @@ interface Particle {
 const generateParticles = (count: number): Particle[] => {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
-    size: Math.random() * 4 + 2, // 2-6px
-    duration: Math.random() * 20 + 15, // 15-35s
-    delay: Math.random() * 5,
+    size: Math.random() * 3 + 2, // 2-5px (reduced max size)
+    duration: Math.random() * 15 + 20, // 20-35s (longer duration)
+    delay: Math.random() * 3,
     startX: Math.random() * 100,
     startY: Math.random() * 100,
     endX: Math.random() * 100,
     endY: Math.random() * 100,
-    opacity: [0.1, Math.random() * 0.4 + 0.3, 0.1], // 0.1 -> 0.3-0.7 -> 0.1
+    opacity: [0.05, Math.random() * 0.3 + 0.1, 0.05], // Reduced opacity range
   }));
 };
 
 export function AnimatedBackground() {
-  const [particles] = React.useState(() => generateParticles(50));
+  const [particles] = React.useState(() => generateParticles(30)); // Reduced from 50 to 30
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -38,18 +38,18 @@ export function AnimatedBackground() {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-primary"
+          className="absolute rounded-full bg-primary/60 dark:bg-primary/40"
           style={{
             width: particle.size,
             height: particle.size,
             left: `${particle.startX}%`,
             top: `${particle.startY}%`,
+            willChange: 'transform, opacity',
           }}
           animate={{
             x: [`0%`, `${particle.endX - particle.startX}vw`, `0%`],
             y: [`0%`, `${particle.endY - particle.startY}vh`, `0%`],
             opacity: particle.opacity,
-            scale: [1, 1.5, 1],
           }}
           transition={{
             duration: particle.duration,
@@ -62,30 +62,32 @@ export function AnimatedBackground() {
 
       {/* Gradient Orbs */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/10 dark:bg-primary/5 blur-3xl"
+        className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-primary/8 dark:bg-primary/4 blur-3xl"
+        style={{ willChange: 'transform, opacity' }}
         animate={{
-          scale: [1, 1.3, 1],
-          x: [0, 100, 0],
-          y: [0, -50, 0],
-          opacity: [0.3, 0.5, 0.3],
+          scale: [1, 1.2, 1],
+          x: [0, 60, 0],
+          y: [0, -30, 0],
+          opacity: [0.2, 0.4, 0.2],
         }}
         transition={{
-          duration: 20,
+          duration: 25,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
       />
       
       <motion.div
-        className="absolute top-1/2 right-1/4 w-96 h-96 rounded-full bg-accent/10 dark:bg-accent/5 blur-3xl"
+        className="absolute top-1/2 right-1/4 w-80 h-80 rounded-full bg-accent/6 dark:bg-accent/3 blur-3xl"
+        style={{ willChange: 'transform, opacity' }}
         animate={{
-          scale: [1.2, 1, 1.2],
-          x: [0, -80, 0],
-          y: [0, 80, 0],
-          opacity: [0.2, 0.4, 0.2],
+          scale: [1.1, 1, 1.1],
+          x: [0, -50, 0],
+          y: [0, 50, 0],
+          opacity: [0.15, 0.3, 0.15],
         }}
         transition={{
-          duration: 25,
+          duration: 30,
           repeat: Infinity,
           ease: 'easeInOut',
           delay: 2,
@@ -93,15 +95,16 @@ export function AnimatedBackground() {
       />
       
       <motion.div
-        className="absolute bottom-1/4 left-1/2 w-96 h-96 rounded-full bg-secondary/20 dark:bg-secondary/10 blur-3xl"
+        className="absolute bottom-1/4 left-1/2 w-80 h-80 rounded-full bg-secondary/15 dark:bg-secondary/8 blur-3xl"
+        style={{ willChange: 'transform, opacity' }}
         animate={{
-          scale: [1, 1.4, 1],
-          x: [0, 60, 0],
-          y: [0, -100, 0],
-          opacity: [0.25, 0.45, 0.25],
+          scale: [1, 1.3, 1],
+          x: [0, 40, 0],
+          y: [0, -60, 0],
+          opacity: [0.2, 0.35, 0.2],
         }}
         transition={{
-          duration: 22,
+          duration: 28,
           repeat: Infinity,
           ease: 'easeInOut',
           delay: 4,

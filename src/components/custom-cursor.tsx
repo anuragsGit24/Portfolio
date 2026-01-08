@@ -8,9 +8,14 @@ export function CustomCursor() {
   const [isPointer, setIsPointer] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
   const mousePosition = useMousePosition();
 
   useEffect(() => {
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setIsReducedMotion(mediaQuery.matches);
+
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const isClickable = 
@@ -18,28 +23,15 @@ export function CustomCursor() {
         target.tagName === 'A' ||
         target.closest('button') ||
         target.closest('a') ||
-        target.classList.contains('cursor-pointer') ||
-        target.tagName === 'INPUT' ||
-        target.tagName === 'TEXTAREA';
+        target.classList.contains('cursor-pointer');
       
       setIsPointer(!!isClickable);
     };
 
-    const handleMouseDown = () => {
-      setIsClicking(true);
-    };
-
-    const handleMouseUp = () => {
-      setIsClicking(false);
-    };
-
-    const handleMouseLeave = () => {
-      setIsHidden(true);
-    };
-
-    const handleMouseEnter = () => {
-      setIsHidden(false);
-    };
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+    const handleMouseLeave = () => setIsHidden(true);
+    const handleMouseEnter = () => setIsHidden(false);
 
     document.addEventListener('mouseover', handleMouseOver);
     document.addEventListener('mousedown', handleMouseDown);
@@ -56,7 +48,8 @@ export function CustomCursor() {
     };
   }, []);
 
-  if (isHidden) return null;
+  // Disable custom cursor for reduced motion or mobile
+  if (isHidden || isReducedMotion || typeof window !== 'undefined' && window.innerWidth < 768) return null;
 
   return (
     <>
@@ -64,23 +57,23 @@ export function CustomCursor() {
       <motion.div
         className="pointer-events-none fixed z-[9999] mix-blend-difference hidden md:block"
         animate={{
-          x: mousePosition.x - 10,
-          y: mousePosition.y - 10,
-          scale: isClicking ? 0.8 : (isPointer ? 1.5 : 1),
+          x: mousePosition.x - 8,
+          y: mousePosition.y - 8,
+          scale: isClicking ? 0.9 : (isPointer ? 1.3 : 1),
         }}
         transition={{
           type: 'spring',
-          stiffness: 500,
-          damping: 28,
-          mass: 0.5,
+          stiffness: 400,
+          damping: 25,
+          mass: 0.3,
         }}
         style={{ willChange: 'transform' }}
       >
         <motion.div 
-          className="h-5 w-5 rounded-full border-2 border-primary bg-primary/20"
+          className="h-4 w-4 rounded-full border-2 border-primary bg-primary/30"
           animate={{
             rotate: isPointer ? 45 : 0,
-            borderRadius: isClicking ? "30%" : "50%",
+            borderRadius: isClicking ? "40%" : "50%",
           }}
           transition={{
             type: 'spring',
@@ -89,49 +82,6 @@ export function CustomCursor() {
           }}
         />
       </motion.div>
-
-      {/* Trailing cursor */}
-      <motion.div
-        className="pointer-events-none fixed z-[9998] mix-blend-difference hidden md:block"
-        animate={{
-          x: mousePosition.x - 20,
-          y: mousePosition.y - 20,
-          scale: isClicking ? 1.5 : (isPointer ? 2 : 1),
-          opacity: isClicking ? 0.3 : 1,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 150,
-          damping: 15,
-          mass: 0.1,
-        }}
-        style={{ willChange: 'transform, opacity' }}
-      >
-        <div className="h-10 w-10 rounded-full border border-primary/50" />
-      </motion.div>
-
-      {/* Click ripple effect */}
-      {isClicking && (
-        <motion.div
-          className="pointer-events-none fixed z-[9997] mix-blend-difference hidden md:block"
-          initial={{
-            x: mousePosition.x - 30,
-            y: mousePosition.y - 30,
-            scale: 0,
-            opacity: 0.5,
-          }}
-          animate={{
-            scale: 2,
-            opacity: 0,
-          }}
-          transition={{
-            duration: 0.6,
-            ease: 'easeOut',
-          }}
-        >
-          <div className="h-16 w-16 rounded-full border border-primary" />
-        </motion.div>
-      )}
     </>
   );
 }
