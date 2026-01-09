@@ -32,26 +32,26 @@
   }
 
   .dark {
-    /* Dark mode - ultra-modern premium */
+    /* Dark mode - ultra-modern premium with WCAG AA compliance */
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
-    --card: 240 10% 6%;
+    --card: 240 10% 8%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 6%;
+    --popover: 240 10% 8%;
     --popover-foreground: 0 0% 98%;
-    --primary: 263 70% 55%;
+    --primary: 263 70% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 6% 10%;
+    --secondary: 240 6% 12%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 240 6% 10%;
-    --muted-foreground: 240 5% 65%;
-    --accent: 263 70% 55%;
+    --muted: 240 6% 12%;
+    --muted-foreground: 240 5% 70%;
+    --accent: 263 70% 60%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 6% 15%;
-    --input: 240 6% 15%;
-    --ring: 263 70% 55%;
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
+    --ring: 263 70% 60%;
     
     /* Glassmorphism */
     --glass-bg: rgba(15, 15, 25, 0.7);
@@ -136,28 +136,56 @@
     transition: none !important;
   }
   
-  /* Hide default cursor on desktop */
+  /* Hide default cursor on desktop - but keep for form inputs */
   @media (min-width: 768px) {
     * {
       cursor: none !important;
     }
+    
+    input, textarea, select, button, a, [role="button"] {
+      cursor: pointer !important;
+    }
+    
+    input:focus, textarea:focus, select:focus {
+      cursor: text !important;
+    }
+  }
+  
+  /* Enhanced focus indicators for accessibility */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  /* Skip to main content link for keyboard navigation */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 100;
+  }
+  
+  .skip-link:focus {
+    top: 0;
   }
 }
 
 @layer utilities {
-  /* Glassmorphism effect */
+  /* Clean glass effect without blur (performance) */
   .glass {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
   }
   
   .glass-heavy {
     background: var(--glass-bg);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--glass-border);
+    backdrop-filter: none; /* Explicitly disable for performance */
   }
   
   /* Premium gradient text */
@@ -173,13 +201,7 @@
   
   /* Premium card effect */
   .premium-card {
-    @apply glass rounded-2xl p-6 transition-all duration-300;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  }
-  
-  .premium-card:hover {
-    box-shadow: 0 16px 48px rgba(147, 51, 234, 0.2);
-    transform: translateY(-4px);
+    @apply rounded-lg p-6 border border-border transition-colors;
   }
   
   /* Section padding */
@@ -206,19 +228,17 @@
     pointer-events: none;
   }
   
-  /* Glow effect */
+  /* Remove heavy glow effects - simple border instead */
   .glow {
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3),
-                0 0 40px rgba(147, 51, 234, 0.2);
+    border-color: hsl(var(--primary));
   }
   
   .glow-hover {
-    transition: box-shadow 0.3s ease;
+    transition: border-color 0.3s ease;
   }
   
   .glow-hover:hover {
-    box-shadow: 0 0 30px rgba(147, 51, 234, 0.4),
-                0 0 60px rgba(147, 51, 234, 0.3);
+    border-color: hsl(var(--primary) / 0.8);
   }
 }
 
@@ -249,26 +269,22 @@
 @keyframes fade-in-up {
   0% {
     opacity: 0;
-    transform: translateY(30px);
-    filter: blur(10px);
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 
 @keyframes fade-in-down {
   0% {
     opacity: 0;
-    transform: translateY(-30px);
-    filter: blur(10px);
+    transform: translateY(-20px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 
@@ -285,10 +301,10 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+    opacity: 1;
   }
   50% {
-    box-shadow: 0 0 40px rgba(147, 51, 234, 0.6);
+    opacity: 0.8;
   }
 }
 

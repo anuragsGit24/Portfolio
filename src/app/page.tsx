@@ -36,7 +36,7 @@ const GithubActivityLoader = dynamic(() => import('@/components/github-activity-
 
 export default function Home() {
   return (
-    <>
+    <main id="main-content">
       <HeroSection />
       <AboutSection />
       <SkillsSection />
@@ -46,6 +46,6 @@ export default function Home() {
       <TestimonialsSection />
       <GithubActivityLoader />
       <ContactSection />
-    </>
+    </main>
   );
 }

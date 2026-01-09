@@ -13,20 +13,22 @@ import {
   staggerFastContainerVariants 
 } from '@/lib/animations';
 import { useScrollAnimation } from '@/hooks/use-animation';
+import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 
 export function SkillsSection() {
   const { highlightedSkills, logInteraction } = usePortfolio();
   const { ref, inView } = useScrollAnimation(0.1);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
-    <SectionWrapper id="skills" className="bg-secondary/20">
+    <SectionWrapper id="skills" className="bg-secondary/30">
       <motion.div
         ref={ref}
-        variants={staggerContainerVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        variants={prefersReducedMotion ? {} : staggerContainerVariants}
+        initial={prefersReducedMotion ? {} : "hidden"}
+        animate={prefersReducedMotion ? {} : (inView ? 'visible' : 'hidden')}
       >
-        <motion.div variants={fadeInUpVariants} className="text-center mb-16">
+        <motion.div variants={prefersReducedMotion ? {} : fadeInUpVariants} className="text-center mb-16">
           <Badge variant="outline" className="mb-4">Technical Excellence</Badge>
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
             <span className="gradient-text">Skills</span> & Expertise
@@ -43,60 +45,40 @@ export function SkillsSection() {
               variants={fadeInUpVariants}
               custom={idx}
             >
-              <Card className="premium-card h-full border-2 border-primary/10 hover:border-primary/30 group">
+              <Card className="h-full border border-border hover:border-primary/50 transition-colors">
                 <CardHeader className="flex-row items-center gap-4 pb-4">
-                  <motion.div
-                    whileHover={{ rotate: 360, scale: 1.2 }}
-                    transition={{ duration: 0.6 }}
-                    className="glass p-3 rounded-xl"
-                  >
+                  <div className="p-3 rounded-lg bg-primary/10">
                     <category.icon className="w-6 h-6 text-primary" />
-                  </motion.div>
+                  </div>
                   <CardTitle className="text-xl font-bold">{category.name}</CardTitle>
                 </CardHeader>
                 
                 <CardContent>
-                  <motion.ul 
-                    variants={staggerFastContainerVariants}
-                    initial="hidden"
-                    animate={inView ? 'visible' : 'hidden'}
-                    className="space-y-2"
-                  >
+                  <ul className="space-y-2">
                     {category.skills.map((skill) => {
                       const isHighlighted = highlightedSkills.includes(skill.name);
                       return (
-                        <motion.li
+                        <li
                           key={skill.name}
-                          variants={fadeInUpVariants}
                           onMouseEnter={() => logInteraction('skill', skill.name)}
-                          whileHover={{ x: 8, scale: 1.02 }}
                           className={cn(
-                            "flex items-center gap-3 p-3 rounded-lg transition-all duration-200 cursor-default",
+                            "flex items-center gap-3 p-3 rounded-lg transition-colors cursor-default",
                             isHighlighted 
-                              ? "glass-heavy border border-primary/30 glow" 
-                              : "glass hover:glass-heavy"
+                              ? "bg-primary/10 border border-primary/30" 
+                              : "bg-background/50 hover:bg-background"
                           )}
                         >
-                          <motion.div
-                            whileHover={{ rotate: 180 }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            <skill.icon className="w-4 h-4 text-primary" />
-                          </motion.div>
+                          <skill.icon className="w-4 h-4 text-primary" />
                           <span className="font-medium text-sm">{skill.name}</span>
                           {isHighlighted && (
-                            <motion.div
-                              initial={{ opacity: 0, scale: 0 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              className="ml-auto"
-                            >
+                            <div className="ml-auto">
                               <Badge variant="default" className="text-xs">★</Badge>
-                            </motion.div>
+                            </div>
                           )}
-                        </motion.li>
+                        </li>
                       );
                     })}
-                  </motion.ul>
+                  </ul>
                 </CardContent>
               </Card>
             </motion.div>
@@ -105,7 +87,7 @@ export function SkillsSection() {
 
         {/* Backend Emphasis Section */}
         <motion.div
-          variants={fadeInUpVariants}
+          variants={prefersReducedMotion ? {} : fadeInUpVariants}
           className="mt-16 text-center glass-heavy p-8 rounded-3xl border border-primary/20"
         >
           <h3 className="text-2xl font-bold mb-4">
@@ -118,15 +100,9 @@ export function SkillsSection() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {['System Design', 'REST APIs', 'Microservices', 'Database Optimization', 'Performance Tuning', 'Cloud Architecture'].map((item) => (
-              <motion.div
-                key={item}
-                whileHover={{ scale: 1.1, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Badge variant="outline" className="px-4 py-2 text-sm">
-                  {item}
-                </Badge>
-              </motion.div>
+              <Badge key={item} variant="outline" className="px-4 py-2 text-sm">
+                {item}
+              </Badge>
             ))}
           </div>
         </motion.div>

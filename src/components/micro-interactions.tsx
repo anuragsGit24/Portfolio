@@ -51,20 +51,20 @@ export function ScaleOnView({ children, delay = 0, className }: MicroInteraction
   );
 }
 
-// Blur fade micro-interaction
+// Simple fade (no blur for performance)
 export function BlurFade({ children, delay = 0, className }: MicroInteractionProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, filter: "blur(10px)" }}
-      whileInView={{ opacity: 1, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{
-        duration: 0.7,
+        duration: 0.4,
         delay,
-        ease: [0.22, 1, 0.36, 1],
+        ease: "easeOut",
       }}
       className={className}
-      style={{ willChange: 'filter, opacity' }}
+      style={{ willChange: 'transform, opacity' }}
     >
       {children}
     </motion.div>

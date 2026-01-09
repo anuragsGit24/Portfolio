@@ -49,19 +49,22 @@ export function ContactSection() {
           Have a project in mind, want to collaborate, or just say hi? Drop me a line.
         </p>
       </div>
+      <a href="#contact-form" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-primary focus:text-primary-foreground">
+        Skip to contact form
+      </a>
       <div className="max-w-2xl mx-auto">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" aria-label="Contact form">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel htmlFor="name">Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Your Name" {...field} />
+                    <Input id="name" placeholder="Your Name" aria-required="true" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage role="alert" />
                 </FormItem>
               )}
             />
@@ -70,11 +73,11 @@ export function ContactSection() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel htmlFor="email">Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="your.email@example.com" {...field} />
+                    <Input id="email" type="email" placeholder="your.email@example.com" aria-required="true" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage role="alert" />
                 </FormItem>
               )}
             />
@@ -83,21 +86,21 @@ export function ContactSection() {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Message</FormLabel>
+                  <FormLabel htmlFor="message">Message</FormLabel>
                   <FormControl>
-                     <Textarea placeholder="Your message..." {...field} className="min-h-[120px]" />
+                     <Textarea id="message" placeholder="Your message..." aria-required="true" {...field} className="min-h-[120px]" />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage role="alert" />
                 </FormItem>
               )}
             />
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                 <Button type="submit" size="lg" disabled={form.formState.isSubmitting}>
-                    {form.formState.isSubmitting ? "Sending..." : <>Send Message <Send className="ml-2 h-4 w-4"/></>}
+                 <Button type="submit" size="lg" disabled={form.formState.isSubmitting} aria-label="Send contact message">
+                    {form.formState.isSubmitting ? "Sending..." : <>Send Message <Send className="ml-2 h-4 w-4" aria-hidden="true"/></>}
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                    <a href="mailto:hello@example.com">
-                        <Mail className="mr-2 h-4 w-4" />
+                    <a href="mailto:hello@example.com" aria-label="Send email directly to Anurag Singh">
+                        <Mail className="mr-2 h-4 w-4" aria-hidden="true" />
                         Email Me Directly
                     </a>
                 </Button>

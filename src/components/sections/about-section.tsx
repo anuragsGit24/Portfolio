@@ -29,13 +29,13 @@ export function AboutSection() {
     <SectionWrapper id="about" >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
         <div className="lg:col-span-1 flex justify-center">
-          <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl group">
+          <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl" role="img" aria-label="Profile picture of Anurag Singh">
              {profileImage && (
                 <Image
                   src={profileImage.imageUrl}
                   alt={profileImage.description}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover"
                   data-ai-hint={profileImage}
                 />
               )}

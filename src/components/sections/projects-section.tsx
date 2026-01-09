@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PROJECTS } from '@/lib/data';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -14,12 +14,10 @@ import { usePortfolio } from '@/context/portfolio-context';
 import { cn } from '@/lib/utils';
 import { 
   fadeInUpVariants, 
-  staggerContainerVariants,
-  cardHoverVariants,
-  modalBackdropVariants,
-  modalContentVariants 
+  staggerContainerVariants
 } from '@/lib/animations';
-import { useScrollAnimation, useCardTilt } from '@/hooks/use-animation';
+import { useScrollAnimation } from '@/hooks/use-animation';
+import { usePrefersReducedMotion } from '@/hooks/use-prefers-reduced-motion';
 
 interface ProjectModalProps {
   project: any;
@@ -27,39 +25,84 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-function ProjectModal({ project, image, onClose }: ProjectModalProps) {
+const ProjectModal = memo(function ProjectModal({ project, image, onClose }: ProjectModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Lock body scroll
+    document.body.style.overflow = 'hidden';
+    
+    // Focus trap
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+      
+      if (e.key === 'Tab') {
+        if (!modalRef.current) return;
+        const focusable = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const first = focusable[0] as HTMLElement;
+        const last = focusable[focusable.length - 1] as HTMLElement;
+        
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
+
   return (
     <AnimatePresence>
       <motion.div
-        variants={modalBackdropVariants}
-        initial="hidden"
-        animate="visible"
-        exit="hidden"
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
         onClick={onClose}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
       >
         <motion.div
-          variants={modalContentVariants}
-          className="glass-heavy rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+          ref={modalRef}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          className="bg-background border border-border rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="relative">
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 glass-heavy p-2 rounded-full hover:bg-primary/20 transition-colors"
+              className="sticky top-4 left-full ml-4 z-10 bg-background border border-border p-2 rounded-full hover:bg-muted transition-colors"
+              aria-label="Close project details"
+              autoFocus
             >
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" aria-hidden="true" />
             </button>
 
             {image && (
-              <div className="relative h-96 w-full rounded-t-3xl overflow-hidden">
+              <div className="relative h-80 w-full overflow-hidden">
                 <Image
                   src={image.imageUrl}
                   alt={project.title}
                   fill
                   className="object-cover"
+                  priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
               </div>
             )}
 
@@ -72,23 +115,22 @@ function ProjectModal({ project, image, onClose }: ProjectModalProps) {
                 ))}
               </div>
 
-              <h3 className="text-4xl font-bold mb-4 gradient-text">{project.title}</h3>
+              <h3 id="modal-title" className="text-3xl font-bold mb-4">{project.title}</h3>
               <p className="text-lg text-muted-foreground mb-6">{project.description}</p>
 
               {project.metrics && (
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   {Object.entries(project.metrics).map(([key, value]) => (
-                    <motion.div
+                    <div
                       key={key}
-                      className="glass p-4 rounded-xl"
-                      whileHover={{ scale: 1.05 }}
+                      className="bg-muted/50 p-4 rounded-lg border border-border"
                     >
                       <div className="flex items-center gap-2 mb-2">
                         <TrendingUp className="h-4 w-4 text-primary" />
                         <span className="text-sm text-muted-foreground capitalize">{key}</span>
                       </div>
-                      <p className="text-2xl font-bold gradient-text">{value}</p>
-                    </motion.div>
+                    <p className="text-2xl font-bold text-primary">{String(value)}</p>
+                    </div>
                   ))}
                 </div>
               )}
@@ -100,15 +142,9 @@ function ProjectModal({ project, image, onClose }: ProjectModalProps) {
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech: string) => (
-                    <motion.div
-                      key={tech}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Badge variant="outline" className="text-sm px-3 py-1">
-                        {tech}
-                      </Badge>
-                    </motion.div>
+                    <Badge key={tech} variant="outline" className="text-sm px-3 py-1">
+                      {tech}
+                    </Badge>
                   ))}
                 </div>
               </div>
@@ -133,50 +169,36 @@ function ProjectModal({ project, image, onClose }: ProjectModalProps) {
       </motion.div>
     </AnimatePresence>
   );
-}
+});
 
-function ProjectCard({ project, image, isHighlighted, onCardClick }: any) {
-  const { tilt, ref } = useCardTilt(8);
-
+const ProjectCard = memo(function ProjectCard({ project, image, isHighlighted, onCardClick, prefersReducedMotion }: any) {
   return (
     <motion.div
-      ref={ref as any}
-      variants={fadeInUpVariants}
-      whileHover="hover"
-      className="group cursor-pointer"
+      variants={prefersReducedMotion ? {} : fadeInUpVariants}
+      className="group cursor-pointer h-full"
       onClick={onCardClick}
-      style={{
-        transform: `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
-        transition: 'transform 0.3s ease-out',
-      }}
     >
       <Card 
         className={cn(
-          "overflow-hidden h-full flex flex-col premium-card border-2 relative",
-          isHighlighted && "border-primary/50 glow"
+          "overflow-hidden h-full flex flex-col border hover:border-primary/50 transition-colors",
+          isHighlighted && "border-primary"
         )}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
         <CardHeader className="relative">
-          <div className="relative h-48 w-full mb-4 overflow-hidden rounded-xl">
+          <div className="relative h-48 w-full mb-4 overflow-hidden rounded-lg">
             {image && (
               <Image
                 src={image.imageUrl}
                 alt={project.title}
                 fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
+                className="object-cover"
+                loading="lazy"
               />
             )}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             {isHighlighted && (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="absolute top-2 right-2"
-              >
-                <Badge variant="default" className="glow">★ Featured</Badge>
-              </motion.div>
+              <div className="absolute top-2 right-2">
+                <Badge variant="default">★ Featured</Badge>
+              </div>
             )}
           </div>
           
@@ -188,27 +210,27 @@ function ProjectCard({ project, image, isHighlighted, onCardClick }: any) {
             ))}
           </div>
           
-          <CardTitle className="text-2xl font-bold group-hover:gradient-text transition-all duration-300">
+          <CardTitle className="text-xl font-bold">
             {project.title}
           </CardTitle>
         </CardHeader>
 
-        <CardContent className="flex-grow relative">
+        <CardContent className="flex-grow">
           <p className="text-muted-foreground line-clamp-3 mb-4">{project.description}</p>
           
           {project.metrics && (
             <div className="grid grid-cols-2 gap-2">
               {Object.entries(project.metrics).slice(0, 2).map(([key, value]) => (
-                <div key={key} className="glass p-2 rounded-lg">
+                <div key={key} className="bg-muted/50 p-2 rounded border border-border">
                   <p className="text-xs text-muted-foreground capitalize">{key}</p>
-                  <p className="text-sm font-bold text-primary">{value}</p>
+                  <p className="text-sm font-semibold text-primary">{String(value)}</p>
                 </div>
               ))}
             </div>
           )}
         </CardContent>
 
-        <CardFooter className="flex flex-col gap-3 relative">
+        <CardFooter className="flex flex-col gap-3">
           <div className="flex flex-wrap gap-2 w-full">
             {project.technologies.slice(0, 4).map((tech: string) => (
               <Badge key={tech} variant="outline" className="text-xs">
@@ -222,33 +244,31 @@ function ProjectCard({ project, image, isHighlighted, onCardClick }: any) {
             )}
           </div>
           
-          <motion.div 
-            className="w-full flex items-center justify-between text-primary group-hover:text-primary/80"
-            whileHover={{ x: 5 }}
-          >
+          <div className="w-full flex items-center justify-between text-primary group-hover:text-primary/80 transition-colors">
             <span className="text-sm font-semibold">View Details</span>
             <ArrowRight className="h-4 w-4" />
-          </motion.div>
+          </div>
         </CardFooter>
       </Card>
     </motion.div>
   );
-}
+});
 
 export function ProjectsSection() {
   const { highlightedProjects, logInteraction } = usePortfolio();
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const { ref, inView } = useScrollAnimation(0.1);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
     <SectionWrapper id="projects" className="animated-gradient-bg">
       <motion.div
         ref={ref}
-        variants={staggerContainerVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        variants={prefersReducedMotion ? {} : staggerContainerVariants}
+        initial={prefersReducedMotion ? {} : "hidden"}
+        animate={prefersReducedMotion ? {} : (inView ? 'visible' : 'hidden')}
       >
-        <motion.div variants={fadeInUpVariants} className="text-center mb-16">
+        <motion.div variants={prefersReducedMotion ? {} : fadeInUpVariants} className="text-center mb-16">
           <Badge variant="outline" className="mb-4">Featured Work</Badge>
           <h2 className="text-4xl md:text-6xl font-bold mb-4">
             <span className="gradient-text">Projects</span> That Matter
@@ -269,6 +289,7 @@ export function ProjectsSection() {
                 project={project}
                 image={image}
                 isHighlighted={isHighlighted}
+                prefersReducedMotion={prefersReducedMotion}
                 onCardClick={() => {
                   logInteraction('project', project.title);
                   setSelectedProject(project);

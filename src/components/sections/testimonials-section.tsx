@@ -21,6 +21,7 @@ export function TestimonialsSection() {
           loop: true,
         }}
         className="w-full max-w-4xl mx-auto"
+        aria-label="Testimonials carousel"
       >
         <CarouselContent>
           {TESTIMONIALS.map((testimonial, index) => {

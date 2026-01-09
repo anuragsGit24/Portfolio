@@ -34,11 +34,15 @@ export function SiteHeader() {
 
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <motion.header
         variants={navbarVariants}
         initial="top"
         animate={scrolled ? 'scrolled' : 'top'}
         className="fixed top-0 left-0 right-0 z-50 border-b border-border/40"
+        role="banner"
       >
         <div className="container-custom flex h-16 md:h-20 items-center">
           {/* Logo */}
@@ -53,7 +57,7 @@ export function SiteHeader() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex flex-1 items-center justify-center space-x-1">
+          <nav className="hidden md:flex flex-1 items-center justify-center space-x-1" aria-label="Main navigation">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.replace('#', '');
               return (
@@ -69,6 +73,7 @@ export function SiteHeader() {
                         'relative px-4 py-2 transition-colors',
                         isActive && 'text-primary'
                       )}
+                      aria-current={isActive ? 'page' : undefined}
                     >
                       {item.label}
                       {isActive && (

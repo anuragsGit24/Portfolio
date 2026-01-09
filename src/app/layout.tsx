@@ -15,7 +15,7 @@ import { ServiceWorkerRegistration } from '@/components/service-worker-registrat
 
 export const metadata: Metadata = {
   title: 'Anurag Singh | Backend & Full-Stack Engineer',
-  description: 'Award-winning portfolio of Anurag Singh - Computer Engineering student specializing in Backend Development, Full-Stack Engineering, and AI/ML solutions. 650+ competitive programming problems solved.',
+  description: 'Portfolio of Anurag Singh - Computer Engineering student specializing in Backend Development, Full-Stack Web Devlopment, and AI/ML solutions. 650+ competitive programming problems solved.',
   keywords: ['Backend Engineer', 'Full-Stack Developer', 'Java', 'Spring Boot', 'React', 'AI/ML', 'Competitive Programming'],
   authors: [{ name: 'Anurag Singh' }],
   openGraph: {

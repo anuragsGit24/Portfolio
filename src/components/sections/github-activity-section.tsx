@@ -38,8 +38,7 @@ async function getPinnedRepos() {
     }
   ];
   
-  // Simulate network delay
-  await new Promise(res => setTimeout(res, 1000));
+  // REMOVED artificial delay - no need to simulate network delay for static data
   
   return mockRepos;
 }

@@ -85,16 +85,12 @@ export function AchievementsSection() {
                 variants={fadeInUpVariants}
                 custom={idx}
               >
-                <Card className="premium-card text-center border-2 border-primary/10 hover:border-primary/30 group">
+                <Card className="text-center border border-border hover:border-primary/50 transition-colors">
                   <CardContent className="pt-6">
-                    <motion.div
-                      className="inline-flex p-4 rounded-2xl glass mb-4"
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    >
+                    <div className="inline-flex p-4 rounded-lg bg-primary/10 mb-4">
                       <Icon className="h-8 w-8 text-primary" />
-                    </motion.div>
-                    <div className="text-4xl md:text-5xl font-bold gradient-text mb-2">
+                    </div>
+                    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
                       {count}{stat.suffix}
                     </div>
                     <p className="text-sm text-muted-foreground">{stat.label}</p>
@@ -116,9 +112,8 @@ export function AchievementsSection() {
                 key={platform.name}
                 variants={fadeInUpVariants}
                 custom={idx}
-                whileHover={{ y: -8, scale: 1.02 }}
               >
-                <Card className="premium-card border-2 border-primary/10 hover:border-primary/30">
+                <Card className="border border-border hover:border-primary/50 transition-colors">
                   <CardContent className="pt-6 text-center">
                     <div className="flex items-center justify-between mb-4">
                       <h4 className="text-xl font-bold">{platform.name}</h4>
@@ -158,21 +153,17 @@ export function AchievementsSection() {
                   key={achievement.title}
                   variants={fadeInUpVariants}
                   custom={idx}
-                  whileHover={{ scale: 1.02 }}
                 >
-                  <Card className="premium-card h-full border-2 border-primary/10 hover:border-primary/30 group overflow-hidden">
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-br ${achievement.color} transition-opacity duration-300`} />
-                    <CardContent className="pt-6 relative">
+                  <Card className="h-full border border-border hover:border-primary/50 transition-colors">
+                    <CardContent className="pt-6">
                       <div className="flex items-start gap-4">
-                        <motion.div
-                          className={`p-4 rounded-xl bg-gradient-to-br ${achievement.color} text-white flex-shrink-0`}
-                          whileHover={{ rotate: 360 }}
-                          transition={{ duration: 0.6 }}
+                        <div
+                          className={`p-4 rounded-lg bg-gradient-to-br ${achievement.color} text-white flex-shrink-0`}
                         >
                           <Icon className="h-6 w-6" />
-                        </motion.div>
+                        </div>
                         <div className="flex-1">
-                          <h4 className="text-xl font-bold mb-2 group-hover:gradient-text transition-all">
+                          <h4 className="text-xl font-bold mb-2">
                             {achievement.title}
                           </h4>
                           <p className="text-muted-foreground">
