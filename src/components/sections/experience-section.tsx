@@ -5,7 +5,7 @@ import { Briefcase } from 'lucide-react';
 export function ExperienceSection() {
   return (
     <SectionWrapper id="experience" className="bg-secondary/50">
-      <h2 className="text-3xl md:text-4xl font-bold font-headline text-center mb-16">Work Experience</h2>
+      <h2 className="text-3xl md:text-4xl font-bold font-headline text-center mb-16">Education Experience</h2>
       <div className="relative max-w-2xl mx-auto" role="list" aria-label="Work experience timeline">
         <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2" aria-hidden="true"></div>
         {EXPERIENCE.map((job, index) => (

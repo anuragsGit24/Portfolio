@@ -1,10 +1,7 @@
 import Image from 'next/image';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent } from '@/components/ui/card';
 import { Lightbulb, Code, Rocket } from 'lucide-react';
 import { SectionWrapper } from './section-wrapper';
-
-const profileImage = PlaceHolderImages.find(p => p.id === 'profile-picture');
 
 const philosophies = [
   {
@@ -30,22 +27,19 @@ export function AboutSection() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
         <div className="lg:col-span-1 flex justify-center">
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl" role="img" aria-label="Profile picture of Anurag Singh">
-             {profileImage && (
-                <Image
-                  src={profileImage.imageUrl}
-                  alt={profileImage.description}
-                  fill
-                  className="object-cover"
-                  data-ai-hint={profileImage}
-                />
-              )}
+            <Image
+              src="/ANURAG_SINGH_PHOTO_NEW.jpeg"
+              alt="Profile picture of Anurag Singh"
+              fill
+              className="object-cover"
+            />
             <div className="absolute inset-0 bg-primary/20 rounded-full"></div>
           </div>
         </div>
         <div className="lg:col-span-2">
           <h2 className="text-3xl md:text-4xl font-bold font-headline mb-4">About Me</h2>
           <p className="text-lg text-muted-foreground mb-6">
-            Hello! I'm Anurag, a passionate software developer with a knack for creating elegant solutions in the digital space. My journey in tech started with a fascination for how a few lines of code could bring ideas to life. Today, I specialize in full-stack development, with a strong focus on modern frontend technologies.
+            Hello! I'm Anurag, a passionate software developer with a knack for creating elegant solutions in the digital space. My journey in tech started with a fascination for how a few lines of code could bring ideas to life. Today, I specialize in full-stack development, with a strong focus on modern fullstack technologies. Also, I enjoy doing DSA and CP on side.
           </p>
           <p className="text-lg text-muted-foreground">
             When I'm not coding, you can find me exploring new hiking trails, experimenting with new recipes in the kitchen, or diving into a good sci-fi movies.

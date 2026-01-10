@@ -30,7 +30,7 @@ const ContactSection = dynamic(() => import('@/components/sections/contact-secti
   loading: () => <div className="h-96 animate-pulse bg-muted/20 rounded-lg" />
 });
 
-const GithubActivityLoader = dynamic(() => import('@/components/github-activity-loader').then(mod => ({ default: mod.GithubActivityLoader })), {
+const GithubActivitySection = dynamic(() => import('@/components/sections/github-activity-section').then(mod => ({ default: mod.GithubActivitySection })), {
   loading: () => <div className="h-96 animate-pulse bg-muted/20 rounded-lg" />
 });
 
@@ -44,7 +44,7 @@ export default function Home() {
       <AchievementsSection />
       <ExperienceSection />
       <TestimonialsSection />
-      <GithubActivityLoader />
+      <GithubActivitySection />
       <ContactSection />
     </main>
   );

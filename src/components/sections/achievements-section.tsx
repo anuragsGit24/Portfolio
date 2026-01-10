@@ -14,41 +14,41 @@ import { useScrollAnimation, useAnimatedCounter } from '@/hooks/use-animation';
 const achievements = [
   {
     icon: Code,
-    title: '650+ Problems Solved',
-    description: 'Competitive Programming across LeetCode, Codeforces, and CodeChef',
+    title: '700+ Problems Solved',
+    description: 'Competitive Programming across LeetCode, GeeksForGeeks, Codeforces, and CodeChef',
     color: 'from-purple-500 to-pink-500',
   },
   {
     icon: Trophy,
-    title: 'Hackathon Winner',
-    description: 'Multiple wins in national and university-level hackathons',
+    title: 'Hackathon Finalist',
+    description: 'Multiple finalists in national and university-level hackathons',
     color: 'from-blue-500 to-cyan-500',
   },
   {
     icon: Award,
-    title: 'Technical Excellence',
+    title: 'Academic Excellence',
     description: 'Awards for innovation in backend architecture and system design',
     color: 'from-green-500 to-emerald-500',
   },
-  {
-    icon: Users,
-    title: 'Team Leadership',
-    description: 'Led technical teams in multiple collaborative projects',
-    color: 'from-orange-500 to-red-500',
-  },
+  // {
+  //   icon: Users,
+  //   title: 'Team Leadership',
+  //   description: 'Led technical teams in multiple collaborative projects',
+  //   color: 'from-orange-500 to-red-500',
+  // },
 ];
 
 const stats = [
-  { label: 'Problems Solved', value: 650, suffix: '+', icon: Target },
-  { label: 'Hackathons', value: 12, suffix: '+', icon: Trophy },
-  { label: 'Projects Built', value: 25, suffix: '+', icon: Code },
-  { label: 'Team Members Led', value: 30, suffix: '+', icon: Users },
+  { label: 'Problems Solved', value: 700, suffix: '+', icon: Target },
+  { label: 'Hackathons', value: 10, suffix: '+', icon: Trophy },
+  { label: 'Projects Built', value: 10, suffix: '+', icon: Code },
+  // { label: 'Team Members Led', value: 30, suffix: '+', icon: Users },
 ];
 
 const platforms = [
   { name: 'LeetCode', problems: 350, rank: 'Knight' },
-  { name: 'CodeChef', problems: 200, rank: '4★' },
-  { name: 'Codeforces', problems: 100, rank: 'Specialist' },
+  { name: 'CodeChef', problems: 60, rank: '3★' },
+  { name: 'GeeksForGeeks', problems: 350, rank: 'Top 40 in Institute' },
 ];
 
 export function AchievementsSection() {

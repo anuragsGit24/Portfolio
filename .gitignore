@@ -9,6 +9,7 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+/public/ANURAG_SINGH_PHOTO_NEW.jpeg
 
 # testing
 /coverage
