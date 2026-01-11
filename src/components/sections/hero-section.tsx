@@ -94,7 +94,12 @@ export function HeroSection() {
       {/* Animated background gradient */}
       <div className="absolute inset-0 animated-gradient-bg" />
       
-      {/* Background removed for performance */}
+      {/* Floating dots background */}
+      <div className="floating-dots">
+        {[...Array(20)].map((_, i) => (
+          <div key={i} className="floating-dot" />
+        ))}
+      </div>
 
       {/* Content */}
       <motion.div 
