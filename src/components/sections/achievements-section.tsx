@@ -73,7 +73,7 @@ export function AchievementsSection() {
         </motion.div>
 
         {/* Stats Counter Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {stats.map((stat, idx) => {
             const { count, ref: counterRef } = useAnimatedCounter(stat.value, 2000);
             const Icon = stat.icon;
@@ -145,7 +145,7 @@ export function AchievementsSection() {
           <h3 className="text-2xl md:text-3xl font-bold text-center mb-8">
             Key <span className="gradient-text">Milestones</span>
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {achievements.map((achievement, idx) => {
               const Icon = achievement.icon;
               return (
