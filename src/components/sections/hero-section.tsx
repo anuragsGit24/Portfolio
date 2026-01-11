@@ -19,12 +19,18 @@ const roles = [
 ];
 
 const handleDownloadResume = () => {
-  const link = document.createElement('a');
-  link.href = '/resume.pdf';
-  link.download = 'Anurag_Singh_Resume.pdf';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  try {
+    const link = document.createElement('a');
+    link.href = '/resume.pdf';
+    link.download = 'Anurag_Singh_Resume.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (error) {
+    // Fallback: open in new tab
+    window.open('/resume.pdf', '_blank');
+  }
 };
 
 const AnimatedRole = () => {
