@@ -130,7 +130,7 @@ export function SiteHeader() {
               whileTap={{ scale: 0.95 }}
             >
               <Button className="ml-2 glow-hover" asChild>
-                <a href="/resume.pdf" download="resume.pdf">
+                <a href="/resume.pdf" download="Anurag_Singh_Resume.pdf">
                   <Download className="mr-2 h-4 w-4" />
                   Resume
                 </a>
@@ -248,7 +248,7 @@ export function SiteHeader() {
 
                 {/* CTA Button */}
                 <Button className="w-full glow" size="lg" asChild>
-                  <a href="/resume.pdf" download="resume.pdf">
+                  <a href="/resume.pdf" download="Anurag_Singh_Resume.pdf">
                     <Download className="mr-2 h-5 w-5" />
                     Download Resume
                   </a>

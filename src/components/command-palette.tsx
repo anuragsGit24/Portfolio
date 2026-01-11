@@ -41,7 +41,7 @@ export function CommandPalette() {
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = '/resume.pdf';
-    link.download = 'resume.pdf';
+    link.download = 'Anurag_Singh_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

@@ -9,7 +9,8 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-/public/ANURAG_SINGH_PHOTO_NEW.jpeg
+/public/profile_image.jpeg
+/public/resume.pdf
 
 # testing
 /coverage

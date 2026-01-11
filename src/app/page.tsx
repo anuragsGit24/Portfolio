@@ -22,9 +22,9 @@ const ExperienceSection = dynamic(() => import('@/components/sections/experience
   loading: () => <div className="h-96 animate-pulse bg-muted/20 rounded-lg" />
 });
 
-const TestimonialsSection = dynamic(() => import('@/components/sections/testimonials-section').then(mod => ({ default: mod.TestimonialsSection })), {
-  loading: () => <div className="h-96 animate-pulse bg-muted/20 rounded-lg" />
-});
+// const TestimonialsSection = dynamic(() => import('@/components/sections/testimonials-section').then(mod => ({ default: mod.TestimonialsSection })), {
+//   loading: () => <div className="h-96 animate-pulse bg-muted/20 rounded-lg" />
+// });
 
 const ContactSection = dynamic(() => import('@/components/sections/contact-section').then(mod => ({ default: mod.ContactSection })), {
   loading: () => <div className="h-96 animate-pulse bg-muted/20 rounded-lg" />
@@ -43,7 +43,7 @@ export default function Home() {
       <ProjectsSection />
       <AchievementsSection />
       <ExperienceSection />
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
       <GithubActivitySection />
       <ContactSection />
     </main>

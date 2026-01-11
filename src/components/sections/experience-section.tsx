@@ -21,7 +21,7 @@ export function ExperienceSection() {
               }`}
             >
               <p className="text-sm text-muted-foreground">{job.period}</p>
-              <h3 className="text-xl font-bold font-headline mt-1">{job.role}</h3>
+              {/* <h3 className="text-xl font-bold font-headline mt-1">{job.role}</h3> */}
               <p className="font-semibold text-primary">{job.company}</p>
               <p className="mt-3 text-muted-foreground">{job.description}</p>
             </div>

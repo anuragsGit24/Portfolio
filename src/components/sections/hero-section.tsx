@@ -18,6 +18,15 @@ const roles = [
   'System Architect',
 ];
 
+const handleDownloadResume = () => {
+  const link = document.createElement('a');
+  link.href = '/resume.pdf';
+  link.download = 'Anurag_Singh_Resume.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 const AnimatedRole = () => {
   const [index, setIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
@@ -164,6 +173,7 @@ export function HeroSection() {
                 size="lg"
                 variant="outline"
                 className="px-8 py-6 text-lg rounded-xl border-2 glass-heavy"
+                onClick={handleDownloadResume}
               >
                 <FileText className="mr-2 h-5 w-5" />
                 Download Resume
