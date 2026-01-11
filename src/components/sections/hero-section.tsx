@@ -189,7 +189,7 @@ export function HeroSection() {
             {[
               { icon: Github, href: 'https://github.com/anuragsGit24', label: 'GitHub' },
               { icon: Linkedin, href: 'https://www.linkedin.com/in/anurag-singh-b62327314/', label: 'LinkedIn' },
-              { icon: Mail, href: 'mailto:contact@anurag.tech', label: 'Email' },
+              { icon: Mail, href: 'https://mail.google.com/mail/?view=cm&fs=1&to=anuragsinghm08@gmail.com', label: 'Email' },
             ].map((social, idx) => (
               <motion.a
                 key={idx}

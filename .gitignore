@@ -9,8 +9,8 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-/public/profile_image.jpeg
-/public/resume.pdf
+# /public/profile_image.jpeg
+# /public/resume.pdf
 
 # testing
 /coverage
