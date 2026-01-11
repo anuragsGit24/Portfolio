@@ -28,7 +28,7 @@ export function AboutSection() {
         <div className="lg:col-span-1 flex justify-center">
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl" role="img" aria-label="Profile picture of Anurag Singh">
             <Image
-              src="/ANURAG_SINGH_PHOTO_NEW.jpeg"
+              src="/profile_image.jpeg"
               alt="Profile picture of Anurag Singh"
               fill
               className="object-cover"

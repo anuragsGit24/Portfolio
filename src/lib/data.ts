@@ -31,8 +31,8 @@ export const PROJECTS = [
       reliability: 'Zero double bookings',
       optimization: 'Reduced redundant API calls',
     },
-    live_url: '#https://github.com/anuragsGit24/BookEase',
-    github_url: '#https://github.com/anuragsGit24/BookEase',
+    live_url: 'https://github.com/anuragsGit24/BookEase',
+    github_url: 'https://github.com/anuragsGit24/BookEase',
   },
 
   {
@@ -47,8 +47,8 @@ export const PROJECTS = [
       latency: '<10s processing time',
       impact: '40%+ improvement in resume relevance',
     },
-    live_url: '#https://ai-resume-analyzer-three-tau.vercel.app/',
-    github_url: '#https://github.com/anuragsGit24/ai-resume-analyzer',
+    live_url: 'https://ai-resume-analyzer-three-tau.vercel.app/',
+    github_url: 'https://github.com/anuragsGit24/ai-resume-analyzer',
   },
 
   {
@@ -63,8 +63,8 @@ export const PROJECTS = [
       accuracy: '≈92%',
       throughput: '30 FPS real-time processing',
     },
-    live_url: '#https://github.com/anuragsGit24/CrashVision',
-    github_url: '#https://github.com/anuragsGit24/CrashVision',
+    live_url: 'https://github.com/anuragsGit24/CrashVision',
+    github_url: 'https://github.com/anuragsGit24/CrashVision',
   },
 
   {
@@ -79,8 +79,8 @@ export const PROJECTS = [
       coverage: 'Accounts, transactions, loans',
       focus: 'Data integrity & security',
     },
-    live_url: '#https://github.com/anuragsGit24/DBMS',
-    github_url: '#https://github.com/anuragsGit24/DBMS',
+    live_url: 'https://github.com/anuragsGit24/DBMS',
+    github_url: 'https://github.com/anuragsGit24/DBMS',
   },
 
   {
@@ -102,8 +102,8 @@ export const PROJECTS = [
       features: 'Campaign & donor lifecycle management',
       security: 'JWT-based authentication',
     },
-    live_url: '#https://github.com/anuragsGit24/KindHeart',
-    github_url: '#https://github.com/anuragsGit24/KindHeart',
+    live_url: 'https://github.com/anuragsGit24/KindHeart',
+    github_url: 'https://github.com/anuragsGit24/KindHeart',
   },
 
   {
@@ -124,8 +124,8 @@ export const PROJECTS = [
       improvement: '30%+ trend interpretation accuracy',
       scale: '10K+ market data points',
     },
-    live_url: '#https://github.com/SumitWadekar/miniproj',
-    github_url: '#https://github.com/SumitWadekar/miniproj',
+    live_url: 'https://github.com/SumitWadekar/miniproj',
+    github_url: 'https://github.com/SumitWadekar/miniproj',
   },
 ];
 

@@ -47,6 +47,42 @@
       "description": "Avatar for a third person giving a testimonial.",
       "imageUrl": "https://images.unsplash.com/photo-1641288883869-c463bc6c2a58?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwZXJzb24lMjBhdmF0YXJ8ZW58MHx8fHwxNzYyMTA2MDMxfDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "person avatar"
+    },
+    {
+      "id": "appointment-booking",
+      "description": "Advanced appointment booking system with concurrent scheduling, real-time availability, and secure payment processing.",
+      "imageUrl": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhcHBvaW50bWVudCUyMGJvb2tpbmclMjBzY2hlZHVsZXxlbnwwfHx8fDE3NjIyMjMzODB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "appointment booking scheduling system"
+    },
+    {
+      "id": "resume-ai",
+      "description": "AI-powered resume optimization platform with automated evaluation, structured data extraction, and low-latency document analysis.",
+      "imageUrl": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyZXN1bWUlMjBvcHRpbWl6YXRpb24lMjBhaXxlbnwwfHx8fDE3NjIyMjQ1ODl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "AI resume optimization automated evaluation"
+    },
+    {
+      "id": "crash-detection",
+      "description": "Real-time computer vision system using CNN and YOLO algorithms to detect vehicle crashes from video streams with high accuracy.",
+      "imageUrl": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXIlMjBjcmFzaCUyMGRldGVjdGlvbiUyMHJlYWx0aW1lfGVufDB8fHx8MTc2MjIyNDU4OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "car crash detection computer vision AI"
+    },
+    {
+      "id": "bank-dbms",
+      "description": "Secure banking database management system with REST APIs, transactional integrity, and enterprise-level security for financial operations.",
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiYW5raW5nJTIwZGF0YWJhc2UlMjBzZWN1cml0eXxlbnwwfHx8fDE3NjIyMjMzODB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "banking database security system"
+    },
+    {
+      "id": "donation-system",
+      "description": "Secure donation management platform with financial transactions, payment processing, and monetary management for charitable organizations.",
+      "imageUrl": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkb25hdGlvbiUyMG1hbmFnZW1lbnQlMjBmaW5hbmNpYWx8ZW58MHx8fHwxNzYyMjIzMzgwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "donation management financial monetary"
+    },
+    {
+      "id": "stock-market",
+      "description": "Advanced stock market analysis platform with machine learning algorithms, statistical modeling, and predictive analytics for financial data.",
+      "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGFuYWx5c2lzJTIwbWwlMjBkYXRhfGVufDB8fHx8MTc2MjIyMzM4MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "stock market analysis ML data"
     }
   ]
 }
