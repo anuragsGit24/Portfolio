@@ -12,7 +12,7 @@ import { PageTransition } from '@/components/page-transition';
 import { CustomCursor } from '@/components/custom-cursor';
 import { AnimatedBackground } from '@/components/animated-background';
 import { ServiceWorkerRegistration } from '@/components/service-worker-registration';
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: 'Anurag Singh | Backend & Full-Stack Engineer',
