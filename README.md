@@ -82,16 +82,6 @@ This portfolio is designed to behave like a production app under real-world cons
 - Remote images are whitelisted via `next.config.ts` `images.remotePatterns`.
 - Skeleton fallbacks are used for dynamically loaded sections to keep perceived performance stable.
 
-**Lighthouse evidence (recommended)**
-Yes—adding a Lighthouse screenshot is useful if it reflects:
-- the current main branch,
-- a production build,
-- and the same device/network profile.
-
-A good pattern is keeping it under `public/metrics/` and referencing it from this README.
-
----
-
 ## 5) UX & Product Thinking
 
 **Navigation clarity**
